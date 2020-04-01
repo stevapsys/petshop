@@ -14,7 +14,8 @@ document.createElement('div');
         nome: "Mateus", 
         telefone: "(11) 99214-1001"
     },
-}; */ 
+}; 
+*/ 
 
 
 let listaDeAnimais = [
@@ -46,7 +47,7 @@ let listaDeAnimais = [
     } 
 ];
 
-function adicionarPet(tipo, nome, idade, raca, porte, sexo, vacinado, tutor){
+const adicionarPet = (tipo, nome, idade, raca, porte, sexo, vacinado, tutor) => {
     let novoPet = {
         //montar o objeto
         tipo, 
@@ -66,13 +67,14 @@ function adicionarPet(tipo, nome, idade, raca, porte, sexo, vacinado, tutor){
     console.log("Pet cadastrado com sucesso!")
 }
 
-function visualizarPets(){
+const visualizarPets = () => {
     //percorrer toda lista de pets
-    for(let i=0; i < listaDeAnimais.length; i++){
+    //for(let i=0; i < listaDeAnimais.length; i++){
 
-        let animal = listaDeAnimais[i]
+       // let animal = listaDeAnimais[i]
 
-        //pra cada pet vai acontecer: 
+    listaDeAnimais.forEach((animal, index) => {
+         //pra cada pet vai acontecer: 
         let divConteudoPet = document.createElement('div')
         // vai criar <div> </div>
         divConteudoPet.setAttribute('class','bichinho')
@@ -89,8 +91,6 @@ function visualizarPets(){
        pTipoAnimal.textContent = "Tipo de animal: " + animal.tipo
        // console.log("Tipo de animal: " + animal.tipo)
  
-       //console.log("Sexto do animal: " + animal.sexo)
-       //console.log("Nome do tutor: " + animal.tutor.nome)
        
        //dentro do meu ConteudoPet, estou adicionando um filho
        divConteudoPet.appendChild(pSeparador)
@@ -98,10 +98,13 @@ function visualizarPets(){
        divConteudoPet.appendChild(pTipoAnimal)
 
        divPet.appendChild(divConteudoPet)
-    }
-}
 
-function buscarPet(nomePet) { 
+    })
+}    
+
+       
+
+const buscarPet = nomePet => { 
         for (let index = 0; index < listaDeAnimais.length; index++) {
             const animal = listaDeAnimais[index];
 
@@ -112,3 +115,67 @@ function buscarPet(nomePet) {
     console.log('Não existe animal cadastrado!'); 
 }
 
+const removerPet = nomePet => {
+    let totalDePets = listaDeAnimais.length
+    listaDeAnimais.filter((animal,index)=>{
+        return nomePet != animal.nome  
+    }) 
+    if(totalDePets == listaDeAnimais.length){
+        return console.log("Não encontramos um animal com o nome de: " + nomePet)
+    }
+    console.log("O animal: " +nomePet + " foi removido com sucesso")
+}
+
+/*
+//FUNÇÕES EXPRESSAS colocando a function na variavel, essa function só começa a funcionar a partir dessa linha do código
+const somar = function(){
+
+}
+
+//AREA FUNCTION - quando tem uma linha só, pode retirar o return e as chaves
+const somar = (a,b) => a + b 
+
+
+//AREA FUNCTION: função anomima sem parametros - area function sem parametros, sou obrigada a colocar o parenteses 
+
+const visualizarPets = ()=>{
+
+}
+
+//AREA FUNCTION: função anomima com um parametros - posso omitir o parenteses
+const visualizarPets = valor =>{
+
+}
+
+//AREA FUNCTION: dois parametros ou mais -> tem que voltar os parenteses
+const visualizarPets = (valorA,valorB) => {
+
+}
+
+*/
+
+//USANDO UM FOR EACH - metódo de um array
+let listaDeFrutas  = ['maçã', 'banana', 'uva'];
+
+listaDeFrutas.forEach(function(valor,index){
+    console.log("O valor da posição: " + index +" é " + valor);
+}) 
+
+//USANDO O FILTER
+
+listaDeFrutas.filter((fruta,index) => {
+    return fruta != 'banana'
+}) 
+
+//USANDO O MAP
+
+listaDeFrutas.map((fruta,index)=> {
+    return "Fruta " + fruta
+})
+
+//USANDO O REDUCE
+let listaSaldo = [10,0,30,100]
+listaSaldo.reduce((resultado,valor,index)=>{
+
+    return resultado + valor
+})
